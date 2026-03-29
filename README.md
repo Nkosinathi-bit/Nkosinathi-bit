@@ -12,6 +12,7 @@
 
 ## 📌 Projects
 - Milly’s Chocolate Factory Database (ERD + Access)
+- Into The Mind (HTML5 + CSS3)
 
 ## 📫 Contact
 - Email: mathenjwankosinathi006@gmail.com
