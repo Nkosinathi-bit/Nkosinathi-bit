@@ -1,6 +1,6 @@
 # Hi, I'm Nkosinathi 👋
 
-🎓 IT student at Belgium Campus  
+🎓 2nd Year IT student at Belgium Campus  
 💻 Currently learning Java, SQL, and Database Development  
 🚀 Working on improving my coding skills through projects  
 
