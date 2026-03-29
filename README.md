@@ -1,16 +1,17 @@
-## Hi there 👋
+# Hi, I'm Nkosinathi 👋
 
-<!--
-**Nkosinathi-bit/Nkosinathi-bit** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+🎓 IT student at Belgium Campus  
+💻 Currently learning Java, SQL, and Database Development  
+🚀 Working on improving my coding skills through projects  
 
-Here are some ideas to get you started:
+## 🛠️ Skills
+- C#
+- SQL
+- Microsoft Access
+- HTML + CSS
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 📌 Projects
+- Milly’s Chocolate Factory Database (ERD + Access)
+
+## 📫 Contact
+- Email: mathenjwankosinathi006@gmail.com
