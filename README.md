@@ -6,7 +6,7 @@
 
 ## 🛠️ Skills
 - C#
-- SQL
+- SQL + T-SQL
 - Microsoft Access
 - HTML + CSS
 
