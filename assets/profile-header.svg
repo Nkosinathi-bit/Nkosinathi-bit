@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
+<title id="title">Nkosinathi Mathenjwa — student developer</title>
+<desc id="desc">Software development, web interfaces and databases. Bachelor of Information Technology student at Belgium Campus, South Africa.</desc>
+<defs>
+<linearGradient id="bg" x2="1" y2="1"><stop stop-color="#091323"/><stop offset=".65" stop-color="#15213a"/><stop offset="1" stop-color="#113136"/></linearGradient>
+<linearGradient id="line"><stop stop-color="#66ddca"/><stop offset="1" stop-color="#889cff"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#6c99d0" stop-opacity=".2"/><stop offset="1" stop-color="#6c99d0" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1200" height="320" rx="18" fill="url(#bg)"/>
+<ellipse cx="1060" cy="120" rx="290" ry="270" fill="url(#glow)"/>
+<g fill="none" stroke="#8babc9" opacity=".08"><path d="M0 60H1200M0 120H1200M0 180H1200M0 240H1200"/><path d="M780 0V320M840 0V320M900 0V320M960 0V320M1020 0V320M1080 0V320M1140 0V320"/></g>
+<path d="M48 205H686" stroke="url(#line)" stroke-width="2"/>
+<text x="48" y="58" fill="#71dac8" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="3">STUDENT DEVELOPER / SOUTH AFRICA</text>
+<text x="44" y="131" fill="#f2f5fb" font-family="Arial,sans-serif" font-size="50" font-weight="700" letter-spacing="-1">Nkosinathi Mathenjwa</text>
+<text x="48" y="177" fill="#bbc9da" font-family="Arial,sans-serif" font-size="20">Software development · Web interfaces · Databases</text>
+<text x="48" y="247" fill="#e0e8f1" font-family="Arial,sans-serif" font-size="16">Bachelor of Information Technology</text>
+<text x="48" y="276" fill="#8fa7bd" font-family="Arial,sans-serif" font-size="14">Belgium Campus · C# / .NET · JavaScript · SQL</text>
+<g transform="translate(978 160)">
+<circle r="111" fill="none" stroke="#8ba9c7" opacity=".15"/>
+<circle r="85" fill="#0d1a2d" stroke="#78cabc" opacity=".75"/>
+<path d="M-48-27-70 0-48 27M48-27 70 0 48 27" fill="none" stroke="#67d7c6" stroke-width="3"/>
+<text y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="700" fill="#ecf3fb">NM</text>
+<circle cx="77" cy="-80" r="6" fill="#78d8c8"/>
+<circle cx="-90" cy="67" r="4" fill="#9caff1"/>
+</g></svg>
