@@ -1,0 +1,118 @@
+name: Capture portfolio previews
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/portfolio-previews.yml'
+      - '.github/scripts/capture-website.cjs'
+      - '.github/scripts/record-console.py'
+
+permissions:
+  contents: read
+
+jobs:
+  websites:
+    name: Website / ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - project: into-the-mind-website
+            source: '49ebfa0f4bc5340e8022969e8077e5fb7e94d791'
+          - project: BugTracker
+            source: '3be5df90d863e9f5dba9657eacdc6052bcf3abf9'
+          - project: media-kit
+            source: 'bb393e2cbceab7df500e6afc3f4fa7d37372b842'
+          - project: porgyandbess
+            source: '55afce7ab84d474d49be3ebc841ffdaf877e057a'
+          - project: umembeso
+            source: 'c502d3962e6e65e58369bff9447e239c1ca8e082'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: tooling
+          persist-credentials: false
+      - uses: actions/checkout@v6
+        with:
+          repository: Nkosinathi-bit/${{ matrix.project }}
+          ref: ${{ matrix.source }}
+          path: project
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Install capture browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/preview" --no-save --package-lock=false playwright@1.62.1
+          "$RUNNER_TEMP/preview/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Record desktop and mobile screenshots
+        env:
+          PROJECT_NAME: ${{ matrix.project }}
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory project > "$RUNNER_TEMP/preview-server.log" 2>&1 &
+          preview_server_pid=$!
+          trap 'kill "$preview_server_pid"' EXIT
+          PLAYWRIGHT_MODULE_PATH="$RUNNER_TEMP/preview/node_modules/playwright" node tooling/.github/scripts/capture-website.cjs
+
+  console-linux:
+    name: Console / ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - project: ExamQualifier
+            source: '4c45a4bc83128119047ae68aa5b93f0282933873'
+            csproj: ExamQualifier.csproj
+            assembly: ExamQualifier.dll
+          - project: Docker-CSharp-Lab
+            source: '5d92d130a4c5b4590b8452edc862439d823a2178'
+            csproj: HelloDocker/HelloDocker.csproj
+            assembly: HelloDocker.dll
+          - project: CloudNativeApplication
+            source: '9baff86390fd2968b95c07dc99cb4bd76953c842'
+            csproj: ExamQualifier.csproj
+            assembly: ExamQualifier.dll
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: tooling
+          persist-credentials: false
+      - uses: actions/checkout@v6
+        with:
+          repository: Nkosinathi-bit/${{ matrix.project }}
+          ref: ${{ matrix.source }}
+          path: project
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - name: Build the actual application
+        run: dotnet build project/${{ matrix.csproj }} -c Release -o compiled
+      - name: Record application output
+        run: python tooling/.github/scripts/record-console.py '${{ matrix.project }}' 'compiled/${{ matrix.assembly }}'
+
+  console-windows:
+    name: Console / SpaceStationProject
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: tooling
+          persist-credentials: false
+      - uses: actions/checkout@v6
+        with:
+          repository: Nkosinathi-bit/SpaceStationProject
+          ref: '6d53bae7aa195d80ca7b30b887921792b6f85b82'
+          path: project
+          persist-credentials: false
+      - uses: microsoft/setup-msbuild@v3
+      - name: Build the actual application
+        run: msbuild project/SpaceStation.sln /restore /p:Configuration=Release
+      - name: Record application output
+        run: python tooling/.github/scripts/record-console.py SpaceStationProject project/src/SpaceStationSimulator/bin/Release/SpaceStationSimulator.exe
