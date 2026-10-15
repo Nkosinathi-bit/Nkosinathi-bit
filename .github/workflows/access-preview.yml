@@ -1,0 +1,37 @@
+name: Capture Access schema preview
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/access-preview.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  schema:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          repository: Nkosinathi-bit/millys-chocolate-factory-database
+          ref: 'f4d4cee53f50fe3163bd50c2cbf7bfca362dc441'
+          path: project
+          persist-credentials: false
+      - name: Install read-only Access inspection tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y mdbtools
+      - name: Export the actual database structure
+        run: |
+          python - <<'PY'
+          import base64, subprocess
+          from pathlib import Path
+          database = Path('project') / "Milly's Chocolate Factory.accdb"
+          result = subprocess.run(['mdb-schema',str(database),'postgres'],check=True,capture_output=True,text=True)
+          if 'CREATE TABLE' not in result.stdout:
+              raise RuntimeError('No database tables were exported.')
+          print('PORTFOLIO_TEXT MillysSchema '+base64.b64encode(result.stdout.encode()).decode())
+          PY
